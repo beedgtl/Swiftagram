@@ -47,10 +47,6 @@ public extension Endpoint.Group.Live {
           ].compactMapValues { $0 })
           .publish(with: session)
           .map(\.data)
-          .map {
-            print(String(data: $0, encoding: .utf8))
-            return $0
-          }
           .wrap()
           .map(Swiftagram.Stream.init)
       }
