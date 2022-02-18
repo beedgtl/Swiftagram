@@ -12,8 +12,8 @@ public struct Stream: Wrapped, Specialized {
     /// The underlying `Response`.
     public var wrapper: () -> Wrapper
   
-  public var  broadcastId: String! { self["broadcast_id"].string(converting: true) }
-  public var  uploadUrl: String! { self["upload_url"].string() }
+  public var broadcastId: String! { self["broadcastId"].string(converting: true) }
+  public var uploadUrl: String! { self["uploadUrl"].string() }
 
   /// Init.
   /// - parameter wrapper: A valid `Wrapper`.
