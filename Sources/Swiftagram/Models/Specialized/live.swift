@@ -14,6 +14,13 @@ public struct Stream: Wrapped, Specialized {
   
   public var broadcastId: String! { self["broadcastId"].string(converting: true) }
   public var uploadUrl: String! { self["uploadUrl"].string() }
+  public var streamServer: String {
+    return uploadUrl.components(separatedBy: broadcastId)[0]
+  }
+  public var streamKey: String {
+    let secondPart = uploadUrl.components(separatedBy: broadcastId)[1]
+    return broadcastId + secondPart
+  }
 
   /// Init.
   /// - parameter wrapper: A valid `Wrapper`.
