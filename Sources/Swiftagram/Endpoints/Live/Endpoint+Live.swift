@@ -29,14 +29,16 @@ public extension Endpoint.Group.Live {
   ///     - offset: An optional `String`.
   ///     - rank: A valid `String`.
   /// - returns: A valid `Request`.
-  func create(_ secret: Secret, message: String?) -> Endpoint.Single<Swiftagram.Stream, Swift.Error> {
+  func create(message: String?) -> Endpoint.Single<Swiftagram.Stream, Swift.Error> {
     .init { secret, session in
       Deferred {
         Request.live
           .path(appending: "live/create/")
           .header(appending: secret.header)
           .body([
+            "_csrftoken": secret["csrftoken"],
             "_uuid": secret.client.device.identifier.uuidString,
+            "_uid": secret.identifier,
             "preview_width": "720",
             "preview_height": "1184",
             "broadcast_message": message,
