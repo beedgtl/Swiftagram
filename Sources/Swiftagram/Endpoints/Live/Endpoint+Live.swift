@@ -19,7 +19,9 @@ public extension Endpoint {
 extension Request {
   /// The `live` base request.
   static let live = Request.version1.live.appendingDefaultHeader()
-  
+}
+
+extension Endpoint.Group.Live {
   /// The create live request.
   ///
   /// - parameters:
