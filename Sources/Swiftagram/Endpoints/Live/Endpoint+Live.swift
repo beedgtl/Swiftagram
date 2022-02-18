@@ -29,7 +29,7 @@ public extension Endpoint.Group.Live {
   ///     - offset: An optional `String`.
   ///     - rank: A valid `String`.
   /// - returns: A valid `Request`.
-  static func create(_ secret: Secret, message: String?) -> Endpoint.Single<Swiftagram.Stream, Swift.Error> {
+  func create(_ secret: Secret, message: String?) -> Endpoint.Single<Swiftagram.Stream, Swift.Error> {
     .init { secret, session in
       Deferred {
         Request.live
