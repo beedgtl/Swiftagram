@@ -33,7 +33,7 @@ public extension Endpoint.Group.Live {
     .init { secret, session in
       Deferred {
         Request.live
-          .path(appending: "live/create/")
+          .path(appending: "create/")
           .header(appending: secret.header)
           .body([
             "_csrftoken": secret["csrftoken"],
