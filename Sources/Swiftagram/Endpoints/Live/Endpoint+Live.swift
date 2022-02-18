@@ -53,4 +53,26 @@ public extension Endpoint.Group.Live {
       .replaceFailingWithError()
     }
   }
+  
+  func start(broadcastId: String) -> Endpoint.Single<Swiftagram.Stream, Swift.Error> {
+    .init { secret, session in
+      Deferred {
+        Request.live
+          .path(appending: broadcastId)
+          .path(appending: "start/")
+          .header(appending: secret.header)
+          .body([
+            "_csrftoken": secret["csrftoken"],
+            "_uuid": secret.client.device.identifier.uuidString,
+            "_uid": secret.identifier,
+            "should_send_notifications": "0",
+          ].compactMapValues { $0 })
+          .publish(with: session)
+          .map(\.data)
+          .wrap()
+          .map(Swiftagram.Stream.init)
+      }
+      .replaceFailingWithError()
+    }
+  }
 }
